@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS bank_account (
+    id SERIAL PRIMARY KEY,
+    owner VARCHAR(100) NOT NULL,
+    balance NUMERIC(19,2) NOT NULL
+);

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank Account Manager</title>
+  <style>
+    :root {
+      --primary-color: #2a9d8f;
+      --secondary-color: #264653;
+      --bg-color: #f4f4f9;
+      --text-color: #333;
+      --border-radius: 4px;
+      --spacing: 1rem;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      padding: var(--spacing);
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: var(--border-radius);
+      padding: var(--spacing);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: var(--secondary-color);
+      margin-bottom: var(--spacing);
+    }
+    form {
+      display: flex;
+      gap: var(--spacing);
+      margin-bottom: var(--spacing);
+      flex-wrap: wrap;
+    }
+    form input[type="text"],
+    form input[type="number"] {
+      flex: 1;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+    }
+    form button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 0.6em 1.2em;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+    }
+    form button:disabled {
+      background: #999;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--spacing);
+    }
+    table th,
+    table td {
+      padding: 0.75em;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+    table th {
+      background: var(--bg-color);
+    }
+    .actions button {
+      margin-right: 0.5em;
+      background: transparent;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 0.3em 0.6em;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+    }
+    .actions button.delete {
+      border-color: #e76f51;
+      color: #e76f51;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bank Accounts</h1>
+    <form id="account-form">
+      <input type="hidden" id="account-id" />
+      <input type="text" id="owner" placeholder="Account Holder" required />
+      <input type="number" id="balance" placeholder="Balance" step="0.01" required />
+      <button type="submit">Save Account</button>
+      <button type="button" id="reset-btn">New</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Holder</th>
+          <th>Balance</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="accounts-body">
+        <!-- rows go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const API_BASE = '/accounts';
+    const form = document.getElementById('account-form');
+    const idField = document.getElementById('account-id');
+    const ownerField = document.getElementById('owner');
+    const balanceField = document.getElementById('balance');
+    const resetBtn = document.getElementById('reset-btn');
+    const tbody = document.getElementById('accounts-body');
+
+    async function fetchAccounts() {
+      const res = await fetch(API_BASE);
+      const list = await res.json();
+      tbody.innerHTML = '';
+      list.forEach(acc => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${acc.id}</td>
+          <td>${acc.owner}</td>
+          <td>${acc.balance.toFixed(2)}</td>
+          <td class="actions">
+            <button data-id="${acc.id}" class="edit">Edit</button>
+            <button data-id="${acc.id}" class="delete">Delete</button>
+          </td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = idField.value;
+      const payload = {
+        owner: ownerField.value,
+        balance: parseFloat(balanceField.value)
+      };
+      let res;
+      if (id) {
+        res = await fetch(`${API_BASE}/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+      }
+      if (res.ok) {
+        resetForm();
+        fetchAccounts();
+      } else {
+        alert('Error saving account');
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      resetForm();
+    });
+
+    tbody.addEventListener('click', async e => {
+      if (e.target.matches('button.edit')) {
+        const id = e.target.dataset.id;
+        const res = await fetch(`${API_BASE}/${id}`);
+        const acc = await res.json();
+        idField.value = acc.id;
+        ownerField.value = acc.owner;
+        balanceField.value = acc.balance;
+      }
+      if (e.target.matches('button.delete')) {
+        if (!confirm('Delete this account?')) return;
+        const id = e.target.dataset.id;
+        const res = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+        if (res.ok) fetchAccounts();
+        else alert('Error deleting account');
+      }
+    });
+
+    function resetForm() {
+      idField.value = '';
+      ownerField.value = '';
+      balanceField.value = '';
+      ownerField.focus();
+    }
+
+    // Initialize
+    fetchAccounts();
+  </script>
+</body>
+</html>
