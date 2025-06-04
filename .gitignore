@@ -399,3 +399,13 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.vscode/settings.json
+installation/ansible-navigator/context/Containerfile
+installation/ansible-navigator/context/_build/requirements.yml
+installation/ansible-navigator/context/_build/scripts/assemble
+installation/ansible-navigator/context/_build/scripts/check_ansible
+installation/ansible-navigator/context/_build/scripts/check_galaxy
+installation/ansible-navigator/context/_build/scripts/entrypoint
+installation/ansible-navigator/context/_build/scripts/install-from-bindep
+installation/ansible-navigator/context/_build/scripts/introspect.py
+installation/ansible-navigator/context/_build/scripts/pip_install
