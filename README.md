@@ -1,5 +1,6 @@
 # ocp-hackathon
 
+Guide [link](https://clbartolome.github.io/ocp-hackathon/ocp-hackathon/index.html)
 
 > [!IMPORTANT]  
 > Last tested versions: 
