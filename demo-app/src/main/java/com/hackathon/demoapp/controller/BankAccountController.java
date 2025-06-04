@@ -47,7 +47,6 @@ public class BankAccountController {
   public ResponseEntity<BankAccount> update(@PathVariable Long id, @RequestBody BankAccount updated) {
     return repository.findById(id)
         .map(acc -> {
-          acc.setOwner(updated.getOwner());
           acc.setBalance(updated.getBalance());
           repository.save(acc);
           return ResponseEntity.ok(acc);
