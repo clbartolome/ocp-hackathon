@@ -1,0 +1,22 @@
+* xref:index.adoc[Bienvenido]
+* xref:user-configuration.adoc[1. Configuración Inicial]
+
+* xref:environment.adoc[2. Entorno]
+
+* xref:demo-app.adoc[3. Demo App]
+
+* xref:demo-app-soluciones.adoc[4. Demo App - Soluciones]
+
+* xref:deploy.adoc[5. OpenShift]
+
+* xref:deploy-soluciones.adoc[6. OpenShift - Soluciones]
+
+* xref:argo.adoc[7. GitOps]
+
+* xref:argo-soluciones.adoc[8. GitOps - Soluciones]
+
+* xref:extra.adoc[9. Extra]
+
+* xref:extra-soluciones.adoc[10. Extra - Soluciones]
+
+

@@ -1,0 +1,113 @@
+= Deploy Demo App in OpenShift - *Soluciones*
+
+A continuación se incluyen algunas pistas y las soluciones al reto *Deploy Demo App in OpenShift*
+
+== Desplegar Base de Datos
+
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Seleccionar el namespace: **%USER%-app**
+* Abrir la line de comandos usando el boton **>_** en la consola de OpenShift
+* Ejecutar ``oc new-app --help`` y ver como configurar imagen, nombre y variables de entorno
+* Ejecutar el comando ``oc new-app`` con la configuracion deseada
+* Validar que el despliegue esta funcionando
+
+TIP: Recuerda que el README.md de la aplicacion tenia algunos ejemplos...
+
+--	
+Solution::	
++	
+--	
+* Seleccionar el namespace: **%USER%-app**
+* Abrir la line de comandos usando el boton **>_** en la consola de OpenShift
+* Ejecutar:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]	
+----	
+oc new-app registry.redhat.io/rhel9/postgresql-16 \
+  --name=postgres \
+  -e POSTGRESQL_USER=user \
+  -e POSTGRESQL_PASSWORD=pass \
+  -e POSTGRESQL_DATABASE=demo
+----	
+* Validar que el despliegue esta funcionando:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]	
+----	
+# Validar pods - Running
+oc get pods
+
+# Ver logs
+oc logs <postgresql-pod>
+
+# Validar servicio
+oc get svc
+----	
+====
+
+== Desplegar Demo App
+
+[tabs, subs="attributes+,+macros"]	
+====	
+Steps::	
++	
+--	
+* Seleccionar el namespace: **%USER%-app**
+* Abrir la seccion ``+ Add`` en la consola de OpenShift
+* Seleccionar la opcion ``Import from Git`` 
+* Rellena la informacion para que se construya a partir de un ``builder image``
+* Revisa con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente
+* Accede a la aplicacion a partir del enlace a la ruta
+
+TIP: Recuerda que el README.md tiene informacion de las variables de entorno que hay que configurar (para el deployment)
+
+--	
+Solution::	
++	
+--	
+* Seleccionar el namespace: **%USER%-app**
+* Abrir la seccion ``+ Add`` en la consola de OpenShift
+* Seleccionar la opcion ``Import from Git`` 
+* Rellenar con la siguiente información:
+** Git Repo URL: https://gitea-gitea.apps.%SERVER%/gitea/demo-app-1 (no hacer caso al warning, es por utilizar Gitea)
+** Import Strategy: Builder Image (Java - openjdk-17-ubi8)
+** Application name: <empty>
+** Name: demo-app
+** Build option: BuildConfig
+** Deploy - Resource type: Deployment
+** Open Show advanced Deployment option y configurar las variables:
+*** DB_HOST=postgres
+*** DB_USER=user
+*** DB_PASSWORD=pass
+** Create a route checked
+* Revisa con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente. Para la linea de comandos, pulsa el boton **>_** en la consola de OpenShift y ejecuta:
+
+[.console-input]
+[source,bash,subs="attributes+,+macros"]	
+----	
+# Review Build and Build logs
+oc get builds
+
+# Review Logs - wait for 'Push successful'
+oc logs demo-app-1-build -f
+
+# Review app pods
+oc get pods
+
+# Review app logs
+oc logs demo-app-***
+
+# Review all resources (copy route url)
+oc get all
+----	
+
+* Acceder mediante la ruta ``https://demo-app-%USER%-app.apps.%SERVER%`` y probar la app
+
+IMPORTANT: Algunas configuracion e incluso la ruta pueden variar si has desplado la base de datos de forma manual o has cambiado alguna configuracion
+
+====
