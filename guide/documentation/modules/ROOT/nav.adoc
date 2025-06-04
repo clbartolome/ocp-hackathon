@@ -16,5 +16,3 @@
 * xref:argo-soluciones.adoc[8. GitOps - Soluciones]
 
 * xref:extra.adoc[9. Extra]
-
-
