@@ -1,0 +1,52 @@
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: "user-{{ user_id }}-app"
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: "user-{{ user_id }}-argo"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: admin-access
+  namespace: "user-{{ user_id }}-app"
+subjects:
+- kind: User
+  name: "user-{{ user_id }}"
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: admin-access
+  namespace: "user-{{ user_id }}-argo"
+subjects:
+- kind: User
+  name: "user-{{ user_id }}"
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: openshift-gitops-admin-access
+  namespace: "user-{{ user_id }}-argo"
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io

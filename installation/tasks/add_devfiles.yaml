@@ -1,0 +1,19 @@
+---
+- name: "Clone demo-app-{{ user_id }}"
+  ansible.builtin.shell: |
+    git -c http.sslVerify=false clone https://gitea:openshift@gitea-{{ gitea.namespace }}.apps.{{ gitea.ocp_domain }}/gitea/demo-app-{{ user_id }}.git
+  args:
+    chdir: "/tmp"
+
+- name: "Create devfile from template in demo-app-{{ user_id }}"
+  ansible.builtin.template:
+    src: devfile.yaml.j2
+    dest: "/tmp/demo-app-{{ user_id }}/devfile.yaml"
+
+- name: "Push demo-app-{{ user_id }} changes"
+  ansible.builtin.shell: |
+    git config --global user.email gitea@gitea.com
+    git config --global user.name gitea
+    git add . && git commit -m "Included devfile" && git -c http.sslVerify=false push
+  args:
+    chdir: "/tmp/demo-app-{{ user_id }}"

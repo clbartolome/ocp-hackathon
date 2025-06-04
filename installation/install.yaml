@@ -1,0 +1,104 @@
+---
+- name: Installation
+  hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+    - name: "max_users_input"
+      prompt: "How many users will participate in the hackathon?"
+      private: no
+
+  tasks:
+
+    - name: Convert number of users to int
+      ansible.builtin.set_fact:
+        max_users: "{{ max_users_input | int }}"
+
+    - name: Setup kubeconfig file
+      ansible.builtin.include_role:
+        name: demos.utils.kubeconfig
+
+    # GITEA ---------------------------------------------------------------------
+    - name: Initialize empty repo_list and user_list
+      ansible.builtin.set_fact:
+        repo_list: []
+        user_list: []
+
+    - name: Build repository and user list
+      ansible.builtin.set_fact:
+        repo_list: "{{ repo_list + [ {
+          'name': 'demo-app-' ~ item,
+          'url': 'https://github.com/clbartolome/ocp-hackathon.git',
+          'branch': 'master',
+          'path': '/demo-app'
+        } ] }}"
+        user_list: "{{ user_list + [ {
+          'id': 'user-' ~ item,
+          'pass': 'hack-user-' ~ item,
+          'admin': false,
+          'colaborator_in': [ 'demo-app-' ~ item ]
+        } ] }}"
+      loop: "{{ range(1, (max_users | int) + 1) | list }}"
+      loop_control:
+        label: "user-{{ item }}"
+
+    - name: Generate gitea role configuration
+      ansible.builtin.set_fact:
+        gitea:
+          namespace: gitea
+          ocp_domain: "{{ ocp_host }}"
+          repositories: "{{ repo_list }}"
+          users: "{{ user_list }}"
+
+    - name: Setup Gitea
+      ansible.builtin.include_role:
+        name: demos.utils.gitea
+
+    - name: Configure DevFiles
+      ansible.builtin.include_tasks: tasks/add_devfiles.yaml
+      loop: "{{ range(1, (max_users | int) + 1) | list }}"
+      loop_control:
+        loop_var: user_id
+
+
+    # USER OCP RESOURCES ---------------------------------------------------------------------
+    - name: Create /opt/myapp/logs directory
+      ansible.builtin.file:
+        path: /tmp/templates
+        state: directory
+        mode: '0750'
+
+    - name: Render resouces templates for all users
+      ansible.builtin.template:
+        src: user_resources.yaml.j2
+        dest: "/tmp/templates/{{ user_id }}.yaml"
+      loop: "{{ range(1, (max_users | int) + 1) | list }}"
+      loop_control:
+        loop_var: user_id
+
+    - name: Create non-deployment Gitea resources
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '/tmp/templates/' ~ user_id ~ '.yaml') | from_yaml_all | list }}"
+      loop: "{{ range(1, (max_users | int) + 1) | list }}"
+      loop_control:
+        loop_var: user_id
+
+    # - name: Configure ArgoCD
+    #   ansible.builtin.include_role:
+    #     name: demos.utils.argocd
+
+    # AUTHENTICATION ---------------------------------------------------------------------
+    - name: Setup HTPASSWD
+      ansible.builtin.include_role:
+        name: demos.utils.htpasswd_provider
+      vars:
+        htpasswd_provider_operation: install
+        htpasswd_provider:
+          name: ocp-hackathon
+          users_key: "user-" 
+          pass_key: "hack-user-"
+          total_users: "{{ max_users }}"
+  
+  vars_files:
+    - vars.yaml

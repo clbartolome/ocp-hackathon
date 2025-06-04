@@ -1,0 +1,23 @@
+---
+kubeconfig:
+  ocp_domain: "{{ ocp_host }}"
+  ocp_api_token: "{{ api_token }}"
+
+
+argo:
+  ocp_domain: "{{ ocp_host }}"
+  target_namespaces: # Namespaces where ArgoCD will create resources
+    - name: demo-app
+    - name: demo-helm
+    - name: demo-kustomize
+    - name: demo-bitwarden
+    - name: demo-dev
+    - name: demo-test
+    - name: demo-prod
+    - name: demo-advanced-sync
+    - name: demo-blue-green
+    - name: demo-canary
+  environment_repo_url: https://github.com/clbartolome/argocd-playground.git
+  environment_repo_revision: master
+  environment_path: environment/* # Will create an app for each directory in this path  
+

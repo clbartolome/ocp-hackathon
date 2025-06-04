@@ -1,0 +1,39 @@
+---
+- name: Uninstallation
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+
+    - name: Setup kubeconfig file
+      ansible.builtin.include_role:
+        name: demos.utils.kubeconfig
+
+    - name: Remove Gitea Namespace
+      kubernetes.core.k8s:
+        state: absent
+        definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: gitea
+      failed_when: false  # In case it was already deleted
+
+    - name: Wait until Gitea project is fully deleted
+      command: oc get project gitea
+      register: project_check
+      failed_when: false
+      retries: 60
+      delay: 10
+      until: project_check.rc != 0
+
+    - name: Delete HTPASSWD
+      ansible.builtin.include_role:
+        name: demos.utils.htpasswd_provider
+      vars:
+        htpasswd_provider_operation: uninstall
+        htpasswd_provider:
+          name: ocp-hackathon
+
+  vars_files:
+    - vars.yaml
