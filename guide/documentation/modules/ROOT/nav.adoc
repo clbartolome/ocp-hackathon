@@ -17,6 +17,4 @@
 
 * xref:extra.adoc[9. Extra]
 
-* xref:extra-soluciones.adoc[10. Extra - Soluciones]
-
 
