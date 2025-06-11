@@ -10,19 +10,19 @@ Steps::
 +	
 --	
 * Seleccionar el namespace: **%USER%-app**
-* Abrir la line de comandos usando el boton **>_** en la consola de OpenShift
+* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift
 * Ejecutar ``oc new-app --help`` y ver como configurar imagen, nombre y variables de entorno
 * Ejecutar el comando ``oc new-app`` con la configuracion deseada
 * Validar que el despliegue esta funcionando
 
-TIP: Recuerda que el README.md de la aplicacion tenia algunos ejemplos...
+TIP: Recuerda que el README.md de la aplicación tenia algunos ejemplos...
 
 --	
-Solution::	
+Solución::	
 +	
 --	
 * Seleccionar el namespace: **%USER%-app**
-* Abrir la line de comandos usando el boton **>_** en la consola de OpenShift
+* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift
 * Ejecutar:
 
 [.console-input]
@@ -60,21 +60,21 @@ Steps::
 * Seleccionar el namespace: **%USER%-app**
 * Abrir la seccion ``+ Add`` en la consola de OpenShift
 * Seleccionar la opcion ``Import from Git`` 
-* Rellena la informacion para que se construya a partir de un ``builder image``
-* Revisa con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente
-* Accede a la aplicacion a partir del enlace a la ruta
+* Rellenar la informacion para que se construya a partir de un ``builder image``
+* Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente
+* Acceder a la aplicación a partir del enlace a la ruta
 
 TIP: Recuerda que el README.md tiene informacion de las variables de entorno que hay que configurar (para el deployment)
 
 --	
-Solution::	
+Solución::	
 +	
 --	
 * Seleccionar el namespace: **%USER%-app**
 * Abrir la seccion ``+ Add`` en la consola de OpenShift
 * Seleccionar la opcion ``Import from Git`` 
 * Rellenar con la siguiente información:
-** Git Repo URL: https://gitea-gitea.apps.%SERVER%/gitea/demo-app-1 (no hacer caso al warning, es por utilizar Gitea)
+** Git Repo URL: http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID% (no hacer caso al warning, es por utilizar Gitea)
 ** Import Strategy: Builder Image (Java - openjdk-17-ubi8)
 ** Application name: <empty>
 ** Name: demo-app
@@ -85,7 +85,7 @@ Solution::
 *** DB_USER=user
 *** DB_PASSWORD=pass
 ** Create a route checked
-* Revisa con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente. Para la linea de comandos, pulsa el boton **>_** en la consola de OpenShift y ejecuta:
+* Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente. Para la linea de comandos, pulsar el boton **>_** en la consola de OpenShift y ejecuta:
 
 [.console-input]
 [source,bash,subs="attributes+,+macros"]	

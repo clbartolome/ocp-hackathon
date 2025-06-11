@@ -1,3 +1,28 @@
-= Gitops y ArgoCD
+= GitOps y ArgoCD
 
-WIP
+Ahora que hemos sido capaces de desplegar nuestra aplicación en OpenShift, es hora de ir un paso más lejos y aplicar el modelo GitOps para su despliegue.
+
+image::gitops.png[GitOps]
+
+ArgoCD despliega aplicaciones en OpenShift siguiendo un enfoque GitOps: monitoriza continuamente el repositorio Git donde están definidos los manifiestos de la aplicación y compara ese estado deseado con el estado real en el clúster. Si detecta diferencias (“drift”) entre lo que hay en Git y lo que está realmente desplegado, notifica al usuario y permite sincronizar los cambios manual o automáticamente para asegurar que la aplicación en OpenShift siempre refleje lo declarado en el repositorio.
+
+Por tanto, para nuestra **demo-app** tendremos que crear un repositorio en **Gitea** con los recursos de kubernetes de nuestra aplicación y decirle a ArgoCD que lo monitorice, obteniendo un CD gestionado por ArgoCD. 
+
+Para evitar conflictos con el despliegue que ya hemos realizado y poder usar los recursos generados como base, vamos a usar el namespace **%USER%-argo**.
+
+NOTE: La base de datos ya se encuentra desplegada en el namespace **%USER%-argo-db**.
+
+IMPORTANT: Se utilizará la imagen de la aplicación demo-app: **quay.io/calopezb/hack-demo-app:1.0**
+
+== El RETO
+
+Realizar las siguientes acciones:
+
+* Crear un repositorio en Gitea
+* Añadir los CRDs para desplegar la aplicación
+* Crear una aplicación en ArgoCD (sincronizacion automática)
+* Probar que ArgoCD despliega y corrige restablece la configuracion deseada en caso de cambios
+
+IMPORTANT: El nombre de la aplicación en ArgoCD debe contener vuestro nombre de usuario, p.ej: **app-%USER%**
+CAUTION: En caso de errores de certificado, recuerda que puedes usar las URLs internas...
+

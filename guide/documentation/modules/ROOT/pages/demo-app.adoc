@@ -1,27 +1,28 @@
 = Demo App
 
-Lo primero que vamos a hacer es revisar la aplicacion con la que vamos a trabajar durante el hackathon.
+Lo primero que vamos a hacer es revisar la aplicación con la que vamos a trabajar durante el hackathon.
 
-Como podeis ver el el fichero ``pom.xml`` se trata de una aplicacion **Java17 + SpringBoot** que realiza operaciones CRUD sobre una base de datos **Postgresql**
+Como puedes ver el el fichero ``pom.xml`` se trata de una aplicación **Java17 + SpringBoot** que realiza operaciones CRUD sobre una base de datos **Postgresql**
 
-NOTE: El en archivo ``README.md`` podeis ver los endpoints que expone, variables de entorno para su configuración e incluso como podriamos desplegarla junto con una BBDD en local con podman.
+NOTE: El en archivo ``README.md`` puedes ver los endpoints que expone, variables de entorno para su configuración e incluso como podriamos desplegarla junto con una BBDD en local con podman.
 
-La aplicacion expone una web sencilla en su ``/`` para poder crear, listar, editar,...
+La aplicación expone una web sencilla en su ``/`` para poder crear, listar, editar,...
 
 image::app.png[App]
 
-La aplicacion incluye un ``devfile.yaml`` en el que encontraremos:
+La aplicación incluye un ``devfile.yaml`` en el que encontraremos:
+
 * Un IDE listo para programas con el código clonado
 * Un contenedor con Maven configurado
-* Una base de datos ``Postgresql`` ya configurada para que la aplicacion se conecte automaticamente al arrancar en local
+* Una base de datos ``Postgresql`` ya configurada para que la aplicación se conecte automaticamente al arrancar en local
 * Comandos para ayudar a ejecutar tareas de desarrollo
-* Urls utiles para realizar pruebas
+* URLs utiles para realizar pruebas
 
 == El RETO
 
 Realizar las siguientes acciones:
 
-* Abrir la aplicacion en devSpaces (IDE contenerizado)
+* Abrir la aplicación en devSpaces (IDE contenerizado)
 * Ejecutar los test unitarios por medio de una *TASK* o *command* definido en el devfile.yaml (corregir el código, no los tests, en caso de error)
-* Desplegar la aplicacion dentro del DevSpace por medio una *TASK* o *command* definida en el devfile (abrir la web y realizar alguna prueba)
+* Desplegar la aplicación dentro del DevSpace por medio una *TASK* o *command* definida en el devfile (abrir la web y realizar alguna prueba)
 * Subir la correción a **Gitea** para que todo funcione en los próximos retos

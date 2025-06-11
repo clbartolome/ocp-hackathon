@@ -1,3 +1,29 @@
 = Retos Adicionales
 
-WIP
+Lo primero de todo:
+
+image::congrats.png[300,300]
+
+Has llegado a este punto y seguro que habrás visto que hay muchas cosas que se pueden mejorar.
+
+Hemos pensado unos retos/modificaciones adicionales para acercar mas estos depliegues a como serían en un entorno real. De todas formas, te animamos a que, si lo prefieres, hagas los cambios o configuraciones que consideres.
+
+IMPORTANT: Para hacer mas ágiles los cambios, y por si hiciera falata modificar código, **usa el namespace %USER%-app** y los recursos desplegados en el (no los de argocd)
+
+Los retos adicionales son:
+
+* **Configuración**:
+** Mover la configuracion de la base de datos a un secret y configMap
+** Mover la configuracion de la aplicación a un secret y configMap
+* **Definir health checks**. Recuerda:
+** Liveness se usa para ver si un contendor esta bien (no hay errores de memoria, cpu, algo que mate mi app) - si falla openshift reinicia el pod
+** Readiness se usa para ver si la aplicación esta lista para recibir trafico. Si falla openshift no manda trafico de forma temporal/elimina el servicio
+* **Gestion CPU, memoria y recursos **. Crear:
+** Limit Ranges (en %USER%-app)
+** Resources Quotas (en %USER%-app)
+** Añadir requests y limits a demo-app
+* **Network Policies**. Crear:
+** Network Policy para un modelo Zero-trust
+** Network Policy para poder comunicarnos desde fuera del cluster (que la ruta funcione)
+
+Y no... aqui no hay soluciones, ánimo!!!

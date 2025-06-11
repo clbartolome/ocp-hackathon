@@ -1,6 +1,6 @@
 = Deploy Demo App in OpenShift
 
-Una vez que nuestra aplicacion ya funciona como esperamos, es hora de deplegarla en OpenShift.
+Una vez que nuestra aplicación ya funciona como esperamos, es hora de deplegarla en OpenShift.
 
 Para esta seccion vamos a utilizar el namespace **%USER%-app**. Si echas un vistazo a los recursos en este namespace desde ``Topology`` en la consola, veras que esta completamente vacio...
 
@@ -11,6 +11,8 @@ Manos a la obra!!
 Realizar las siguientes acciones:
 
 * Desplegar una base de datos postgres usando la line de comandos a partir de la imagen: ``registry.redhat.io/rhel9/postgresql-16``
-* Construir y desplegar la aplicacion ``demo-app`` usando la consola web y como fuente el repositorio git de nuestra aplicacion
+* Construir y desplegar la aplicación ``demo-app`` usando la consola web y como fuente el repositorio git de nuestra aplicacion
+
+IMPORTANT: Para construir la aplicación y evitar errores de certificados, **usar la URL interna de gitea** (servicio): http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%
 
 TIP: Utiliza el icono **>_** del menu superior de la consola de OpenShift para crear un contenedor con el cliente ``oc`` para poder usar la linea de comandos.

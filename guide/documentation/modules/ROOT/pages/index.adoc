@@ -5,38 +5,38 @@ ifndef::lab[]
 :lab-name: Java
 endif::[]
 
-Bienvenidos al Hackathon de OpenShift: **Desplegando una aplicación en OpenShift**
+Bienvenido al Hackathon de OpenShift: **Desplegando una aplicación en OpenShift**
 
-¡Nos alegra contar con vuestra participación en este workathon!
+¡Nos alegra contar con tu participación en este workathon!
 
-¡Esperamos que disfrutéis de la experiencia y que este workathon os ayude a sentiros más cómodos y autónomos en entornos cloud-native y Kubernetes!
+¡Esperamos que disfrutes de la experiencia y que este workathon te ayude a sentirte más cómodo y autónomo en entornos cloud-native y Kubernetes!
 
 **¡Manos a la obra! 🚀**
 
-== Introduccion
+== Introducción
 
-A lo largo de esta jornada, vais a trabajar de forma práctica y colaborativa en el ciclo completo de desarrollo, despliegue y mejora de una aplicación Java SpringBoot en un entorno Kubernetes.
+A lo largo de esta jornada, vas a trabajar de forma práctica y colaborativa en el ciclo completo de desarrollo, despliegue y mejora de una aplicación Java SpringBoot en un entorno Kubernetes.
 
-El objetivo es que experimentéis de primera mano cómo es el flujo de trabajo en este tipo de entornos, desde la revisión y modificación del código en un entorno conterizado, hasta la configuracion y el despliegue a través de GitOps.
+El objetivo es que experimentes de primera mano cómo es el flujo de trabajo en este tipo de entornos, desde la revisión y modificación del código en un entorno conterizado, hasta la configuracion y el despliegue a través de GitOps.
 
-== ¿Qué os vais a encontrar en esta guía?
+== ¿Qué te vas a encontrar en esta guía?
 
-* Accesos y recursos: Aquí encontraréis todos los enlaces, credenciales e instrucciones necesarias para acceder a las distintas plataformas y recursos que usaremos durante el workathon.
-* Entorno preconfigurado: Para facilitar la experiencia, podréis trabajar en OpenShift usando DevSpaces, evitando así complicaciones de configuración local.
-* Pasos guiados: El itinerario está dividido en bloques, de modo que podréis avanzar paso a paso, probando y desplegando una aplicación real y enfrentándoos a pequeños retos técnicos.
-* Retos extra: Si queréis profundizar aún más, encontraréis una sección de retos adicionales para llevar la aplicación al siguiente nivel.
+* Accesos y recursos: Aquí encontrarás todos los enlaces, credenciales e instrucciones necesarias para acceder a las distintas plataformas y recursos que usarás durante el workathon.
+* Entorno preconfigurado: Para facilitar la experiencia, podrás trabajar en OpenShift usando DevSpaces, evitando así complicaciones de configuración local.
+* Pasos guiados: El itinerario está dividido en bloques, de modo que podrás avanzar paso a paso, probando y desplegando una aplicación real y enfrentándote a pequeños retos técnicos.
+* Retos extra: Si quieres profundizar aún más, encontrarás una sección de retos adicionales para llevar la aplicación al siguiente nivel.
 
 == ¿Cómo funciona el workathon?
 * Reto: Se plantearan varios retos en los que inicialmente no se dará ningún tipo de guía o pista.
-* Guía paso a paso: Cada reto contiene un apartado *-soluciones donde encontraries o bien unas guias que os pueden ayudar o directamente la solucion.
-* Soporte: Si os atascáis, encontraréis pistas y, si lo necesitáis, las soluciones completas. Lo importante es que aprendáis experimentando y compartiendo dudas con el grupo.
+* Guía paso a paso: Cada reto contiene un apartado *-soluciones donde encontrarás o bien unas guias que te pueden ayudar o directamente la solución.
+* Soporte: Si te atascas, encontrarás pistas y, si lo necesitas, las soluciones completas. Lo importante es que aprendas experimentando y compartiendo dudas con el grupo.
 * Retos adaptables: Los retos extra son opcionales, pensados para quienes quieran un desafío mayor o profundizar en aspectos clave como configuración avanzada, despliegue automatizado o seguridad.
 
-== ¿Qué aprenderéis?
+== ¿Qué aprenderás?
 * A colaborar y gestionar código fuente con Gitea/Git.
-* A trabajar en un entorno Kubernetes sin necesidad de instalaciones locales, gracias a DevSpaces.
+* A trabajar en un entorno Kubernetes sin necesidad de instalaciones locales, gracias a DevSpaces y el web terminal.
 * A desplegar y gestionar aplicaciones y bases de datos en OpenShift.
-* A configurar aplicaciones para entornos productivos usando configMaps, secrets, health checks y gestión de recursos.
 * A descubrir la potencia de ArgoCD para despliegue continuo.
+* A configurar aplicaciones para entornos productivos usando configMaps, secrets, health checks y gestión de recursos.
 
 

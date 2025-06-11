@@ -20,7 +20,7 @@ Steps::
 TIP: Es posible que falte algun campo por actualizar en el método ``update``?
 
 --	
-Solution::	
+Solución::	
 +	
 --	
 * Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**
@@ -43,11 +43,12 @@ return repository.findById(id)
     .orElse(ResponseEntity.notFound().build());
 }
 ----	
+* Volver a ejecutar los tests para validar
 ====
 
 == Ejecutar en local
 
-Una vez corregida la aplicacion realizar los siguientes pasos:
+Una vez corregida la aplicación realizar los siguientes pasos:
 
 * Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**
 * Buscar la opción ``Tasks: Run Task`` y dentro de ``devfile `` ejecutar ``3. Run application locally``
@@ -59,6 +60,7 @@ CAUTION: Si el navegador automaticamente usa **https**, cambiarlo a **http** par
 == Subir a Git
 
 Existen dos opciones:
+
 * Utilizar el menu de **Git** de visual estudio para hacer commit y push
 * Dentro del IDE ejecutar ``Ctrl + Shift + P`` > ``Create New Terminal``. En la nueva terminal:
 
