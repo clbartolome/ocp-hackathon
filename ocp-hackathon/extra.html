@@ -180,7 +180,95 @@
 <article class="doc">
 <h1 class="page">Retos Adicionales</h1>
 <div class="paragraph">
-<p>WIP</p>
+<p>Lo primero de todo:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/congrats.png" alt="300" width="300">
+</div>
+</div>
+<div class="paragraph">
+<p>Has llegado a este punto y seguro que habrás visto que hay muchas cosas que se pueden mejorar.</p>
+</div>
+<div class="paragraph">
+<p>Hemos pensado unos retos/modificaciones adicionales para acercar mas estos depliegues a como serían en un entorno real. De todas formas, te animamos a que, si lo prefieres, hagas los cambios o configuraciones que consideres.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Para hacer mas ágiles los cambios, y por si hiciera falata modificar código, <strong>usa el namespace %USER%-app</strong> y los recursos desplegados en el (no los de argocd)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Los retos adicionales son:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Configuración</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mover la configuracion de la base de datos a un secret y configMap</p>
+</li>
+<li>
+<p>Mover la configuracion de la aplicación a un secret y configMap</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Definir health checks</strong>. Recuerda:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Liveness se usa para ver si un contendor esta bien (no hay errores de memoria, cpu, algo que mate mi app) - si falla openshift reinicia el pod</p>
+</li>
+<li>
+<p>Readiness se usa para ver si la aplicación esta lista para recibir trafico. Si falla openshift no manda trafico de forma temporal/elimina el servicio</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Gestion CPU, memoria y recursos </strong>. Crear:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Limit Ranges (en %USER%-app)</p>
+</li>
+<li>
+<p>Resources Quotas (en %USER%-app)</p>
+</li>
+<li>
+<p>Añadir requests y limits a demo-app</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Network Policies</strong>. Crear:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Network Policy para un modelo Zero-trust</p>
+</li>
+<li>
+<p>Network Policy para poder comunicarnos desde fuera del cluster (que la ruta funcione)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Y no&#8230;&#8203; aqui no hay soluciones, ánimo!!!</p>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="argo-soluciones.html" class="query-params-link">8. GitOps - Soluciones</a></span>

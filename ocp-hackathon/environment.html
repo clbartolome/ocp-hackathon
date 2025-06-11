@@ -183,10 +183,10 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Todas las aplicaciones y servicios que vais a necesitar para afrontar los retos que se van a plantear ya han sido desplegados y configurados.</p>
+<p>Todas las aplicaciones y servicios que vas a necesitar para afrontar los retos que se van a plantear ya han sido desplegados y configurados.</p>
 </div>
 <div class="paragraph">
-<p>A continuacion se indica como acceder, credenciales y algunos consejos.</p>
+<p>A continuación se indica como acceder, credenciales y algunos consejos.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -195,7 +195,7 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Recomendamos ir accediendo a medida que reviseis los componentes para asegurarnos que todo esta configurado correctamente.
+Recomendamos ir accediendo a medida que revises los componentes para asegurarnos que todo esta configurado correctamente.
 </td>
 </tr>
 </table>
@@ -211,11 +211,13 @@ Recomendamos ir accediendo a medida que reviseis los componentes para asegurarno
 </div>
 </div>
 <div class="paragraph">
-<p>Gitea es una plataforma web de software colaborativo para alojar el control de versiones de desarrollo de software utilizando Git.
-Incluye otras funciones colaborativas como seguimiento de errores, revisión de código, tableros kanban, tickets y wikis.</p>
+<p>Gitea es una plataforma web de software colaborativo para alojar el control de versiones de desarrollo de software utilizando Git.</p>
 </div>
 <div class="paragraph">
-<p>Para este Hackathon se ha desplegado una instancia en la que tendreis ya creado un repositorio llamado <code>demo-app-%ID%</code>. Este repositorio se encuentra la aplicacion que utilizareis durante el hackathon.</p>
+<p>Incluye otras funciones colaborativas como seguimiento de errores, revisión de código, tableros kanban, tickets y wikis.</p>
+</div>
+<div class="paragraph">
+<p>Para este Hackathon se ha desplegado una instancia en la que tendrás ya creado un repositorio llamado <code>demo-app-%ID%</code>. Este repositorio se encuentra la aplicación que utilizarás durante el hackathon.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -234,7 +236,7 @@ Incluye otras funciones colaborativas como seguimiento de errores, revisión de 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Vuestros credenciales para acceder a Gitea son:</p>
+<p>Tus credenciales para acceder a Gitea son:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -249,9 +251,6 @@ Incluye otras funciones colaborativas como seguimiento de errores, revisión de 
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>TODO: info repo</p>
 </div>
 </div>
 </div>
@@ -273,7 +272,7 @@ Incluye otras funciones colaborativas como seguimiento de errores, revisión de 
 <p>El acceso a DevSpaces se realiza a traves del botón <code>IDE</code> situado en la barra de menu superior, al lado derecho.</p>
 </div>
 <div class="paragraph">
-<p>Seguid los siguientes pasos para acceder al entorno de desarrollo:</p>
+<p>Sigue los siguientes pasos para acceder al entorno de desarrollo:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -326,7 +325,7 @@ Incluye otras funciones colaborativas como seguimiento de errores, revisión de 
 </div>
 </li>
 <li>
-<p>Una vez en la pagina de inicio, en la seccion <strong>Import from Git</strong> pegar la url del repositorio de trabajo
+<p>Una vez en la pagina de inicio, en la sección <strong>Import from Git</strong> pegar la url del repositorio de trabajo
 (<a href="https://gitea-gitea.apps.%SERVER%/gitea/demo-app-%ID%" class="bare">https://gitea-gitea.apps.%SERVER%/gitea/demo-app-%ID%</a>) y pulsar <code>Create &amp; Open</code></p>
 </li>
 <li>
@@ -340,7 +339,7 @@ Incluye otras funciones colaborativas como seguimiento de errores, revisión de 
 </ol>
 </div>
 <div class="paragraph">
-<p>Una vez cargado el entorno de desarrollo podreis ver que vuestro proyecto <code>%USER%-hackathon</code> ya esta clonado y listo para empezar a trabajar con él.</p>
+<p>Una vez cargado el entorno de desarrollo podrás ver que tu proyecto <code>%USER%-hackathon</code> ya esta clonado y listo para empezar a trabajar con él.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -390,7 +389,7 @@ Si vuelve a pedir confiar en los autores del repositorio, <strong>confirmar</str
 <p>En resumen, OpenShift te permite centrarte en el desarrollo y la entrega continua de aplicaciones, sin preocuparte por la infraestructura subyacente.</p>
 </div>
 <div class="paragraph">
-<p>Para este Hackathon se va a utilizar un cluster en el que ya se han creado y configurado 2 namespaces que se utilizarán durante los diferentes ejercidios planteados:</p>
+<p>Para este Hackathon se va a utilizar un cluster en el que ya se han creado y configurado 3 namespaces que se utilizarán durante los diferentes ejercidios planteados:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -399,6 +398,9 @@ Si vuelve a pedir confiar en los autores del repositorio, <strong>confirmar</str
 </li>
 <li>
 <p><strong>%USER%-argo</strong>: para el despliegue a traves de ArgoCD</p>
+</li>
+<li>
+<p><strong>%USER%-argo-db</strong>: para la base de datos que utilizaremos en el despliegue con ArgoCD</p>
 </li>
 </ul>
 </div>
@@ -409,7 +411,7 @@ Si vuelve a pedir confiar en los autores del repositorio, <strong>confirmar</str
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Revisad que los namespaces descritos anteriormente estan creados y los veis con vuestros credenciales (abajo)
+Revisa que los namespaces descritos anteriormente estan creados y los ves con tus credenciales (abajo)
 </td>
 </tr>
 </table>
@@ -418,7 +420,7 @@ Revisad que los namespaces descritos anteriormente estan creados y los veis con 
 <div class="content">
 <img src="_images/ocp_home.png" alt="Sunset">
 </div>
-<div class="title">Figure 2. Home AAP</div>
+<div class="title">Figure 2. Home OCP</div>
 </div>
 <div class="paragraph">
 <p>El acceso a OpenShift se realiza a traves del botón <code>OpenShift</code> situado en la barra de menu superior, al lado derecho.</p>
@@ -431,7 +433,7 @@ Revisad que los namespaces descritos anteriormente estan creados y los veis con 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Vuestros credenciales para acceder a AAP son:</p>
+<p>Tus credenciales para acceder a OCP son:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -477,7 +479,7 @@ Revisad que los namespaces descritos anteriormente estan creados y los veis con 
 </ul>
 </div>
 <div class="paragraph">
-<p>Para este Hackathon dispondreis de acceso a una instancia de ArgoCD desplegada en el mismo cluster donde se va a realizar el hackathon. En dicha instancia tendreis lo permisos necesarios para poder crear y gestionar aplicaciones en los namespaces asignados a cada usuario en OpenShift.</p>
+<p>Para este Hackathon dispondrás de acceso a una instancia de ArgoCD desplegada en el mismo cluster donde se va a realizar el hackathon. En dicha instancia tienes lo permisos necesarios para poder crear y gestionar aplicaciones en los namespaces asignados a cada usuario en OpenShift.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -489,7 +491,7 @@ Revisad que los namespaces descritos anteriormente estan creados y los veis con 
 <p>El acceso a ArgoCD se realiza a traves del botón <code>ArgoCD</code> situado en la barra de menu superior, al lado derecho.</p>
 </div>
 <div class="paragraph">
-<p>Seguid los siguientes pasos para acceder a ArgoCD:</p>
+<p>Sigue los siguientes pasos para acceder a ArgoCD:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -542,7 +544,7 @@ Revisad que los namespaces descritos anteriormente estan creados y los veis con 
 </div>
 </li>
 <li>
-<p>Se accede a ArgoCD (sin ninguna aplicacion creada):</p>
+<p>Se accede a ArgoCD (sin ninguna aplicación creada):</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argo.png" alt="600" width="600">

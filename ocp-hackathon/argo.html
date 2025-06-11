@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Gitops y ArgoCD :: OpenShift Hackathon</title>
+    <title>GitOps y ArgoCD :: OpenShift Hackathon</title>
     <link rel="canonical" href="https://clbartolome.github.io/ocp-hackathon/ocp-hackathon/argo.html">
     <link rel="prev" href="deploy-soluciones.html">
     <link rel="next" href="argo-soluciones.html">
@@ -179,9 +179,88 @@
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Gitops y ArgoCD</h1>
+<h1 class="page">GitOps y ArgoCD</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>WIP</p>
+<p>Ahora que hemos sido capaces de desplegar nuestra aplicación en OpenShift, es hora de ir un paso más lejos y aplicar el modelo GitOps para su despliegue.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/gitops.png" alt="GitOps">
+</div>
+</div>
+<div class="paragraph">
+<p>ArgoCD despliega aplicaciones en OpenShift siguiendo un enfoque GitOps: monitoriza continuamente el repositorio Git donde están definidos los manifiestos de la aplicación y compara ese estado deseado con el estado real en el clúster. Si detecta diferencias (“drift”) entre lo que hay en Git y lo que está realmente desplegado, notifica al usuario y permite sincronizar los cambios manual o automáticamente para asegurar que la aplicación en OpenShift siempre refleje lo declarado en el repositorio.</p>
+</div>
+<div class="paragraph">
+<p>Por tanto, para nuestra <strong>demo-app</strong> tendremos que crear un repositorio en <strong>Gitea</strong> con los recursos de kubernetes de nuestra aplicación y decirle a ArgoCD que lo monitorice, obteniendo un CD gestionado por ArgoCD.</p>
+</div>
+<div class="paragraph">
+<p>Para evitar conflictos con el despliegue que ya hemos realizado y poder usar los recursos generados como base, vamos a usar el namespace <strong>%USER%-argo</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+La base de datos ya se encuentra desplegada en el namespace <strong>%USER%-argo-db</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Se utilizará la imagen de la aplicación demo-app: <strong>quay.io/calopezb/hack-demo-app:1.0</strong>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_el_reto"><a class="anchor" href="#_el_reto"></a>El RETO</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Realizar las siguientes acciones:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Crear un repositorio en Gitea</p>
+</li>
+<li>
+<p>Añadir los CRDs para desplegar la aplicación</p>
+</li>
+<li>
+<p>Crear una aplicación en ArgoCD (sincronizacion automática)</p>
+</li>
+<li>
+<p>Probar que ArgoCD despliega y corrige restablece la configuracion deseada en caso de cambios</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El nombre de la aplicación en ArgoCD debe contener vuestro nombre de usuario, p.ej: <strong>app-%USER%</strong>
+CAUTION: En caso de errores de certificado, recuerda que puedes usar las URLs internas&#8230;&#8203;
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="deploy-soluciones.html" class="query-params-link">6. OpenShift - Soluciones</a></span>
