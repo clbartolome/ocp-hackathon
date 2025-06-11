@@ -10,7 +10,7 @@ Revisar la sección: **2. Entorno** > **IDE web**
 
 [tabs, subs="attributes+,+macros"]	
 ====	
-Steps::	
+Guía::	
 +	
 --	
 * Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**

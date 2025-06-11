@@ -6,7 +6,7 @@ A continuación se incluyen algunas pistas y las soluciones al reto *Deploy Demo
 
 [tabs, subs="attributes+,+macros"]	
 ====	
-Steps::	
+Guía::	
 +	
 --	
 * Seleccionar el namespace: **%USER%-app**
@@ -54,7 +54,7 @@ oc get svc
 
 [tabs, subs="attributes+,+macros"]	
 ====	
-Steps::	
+Guía::	
 +	
 --	
 * Seleccionar el namespace: **%USER%-app**

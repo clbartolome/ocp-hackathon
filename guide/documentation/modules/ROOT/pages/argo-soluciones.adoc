@@ -16,7 +16,7 @@ IMPORTANT: Si no es posible clonar el repositorio, usar directamente la web de G
 
 [tabs, subs="attributes+,+macros"]	
 ====	
-Steps::	
+Guía::	
 +	
 --	
 * Ir a Gitea y en el repositorio creado añadir los siguientes ficheros:
@@ -158,7 +158,7 @@ spec:
 
 [tabs, subs="attributes+,+macros"]	
 ====	
-Steps::	
+Guía::	
 +	
 --	
 * Acceder a ArgoCD
