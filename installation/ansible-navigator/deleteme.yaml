@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: user-1-project      # nombre del proyecto (puedes poner el que quieras)
+  namespace: openshift-gitops   # o el namespace donde tienes ArgoCD instalado
+spec:
+  destinations:
+    - namespace: user-1-argo
+      server: https://kubernetes.default.svc    # cluster local
+  sourceRepos:
+    - '*'    # o limita a los repos deseados
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

@@ -60,9 +60,8 @@
       loop_control:
         loop_var: user_id
 
-
     # USER OCP RESOURCES ---------------------------------------------------------------------
-    - name: Create /opt/myapp/logs directory
+    - name: Create /tmp/templates directory
       ansible.builtin.file:
         path: /tmp/templates
         state: directory
@@ -76,7 +75,7 @@
       loop_control:
         loop_var: user_id
 
-    - name: Create non-deployment Gitea resources
+    - name: Create user openshift resources
       kubernetes.core.k8s:
         state: present
         definition: "{{ lookup('file', '/tmp/templates/' ~ user_id ~ '.yaml') | from_yaml_all | list }}"
@@ -84,9 +83,11 @@
       loop_control:
         loop_var: user_id
 
-    # - name: Configure ArgoCD
-    #   ansible.builtin.include_role:
-    #     name: demos.utils.argocd
+    # ADMIN OCP RESOURCES ---------------------------------------------------------------------
+    - name: Create admin resources
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', '../files/admin_resources.yaml') | from_yaml_all | list }}"
 
     # AUTHENTICATION ---------------------------------------------------------------------
     - name: Setup HTPASSWD
@@ -99,6 +100,7 @@
           users_key: "user-" 
           pass_key: "hack-user-"
           total_users: "{{ max_users }}"
+
   
   vars_files:
     - vars.yaml

@@ -3,7 +3,16 @@
   hosts: localhost
   gather_facts: false
 
+  vars_prompt:
+    - name: "max_users_input"
+      prompt: "How many users were configured for the hackathon?"
+      private: no
+
   tasks:
+
+    - name: Convert number of users to int
+      ansible.builtin.set_fact:
+        max_users: "{{ max_users_input | int }}"
 
     - name: Setup kubeconfig file
       ansible.builtin.include_role:
@@ -26,6 +35,30 @@
       retries: 60
       delay: 10
       until: project_check.rc != 0
+
+    - name: Delete demo-app namespaces
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Namespace
+        name: "{{ item }}"
+      loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-app') + ['admin-app'] }}"
+
+    - name: Delete demo-argo namespaces
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Namespace
+        name: "{{ item }}"
+      loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo')}}"
+
+    - name: Delete demo-argo-db namespaces
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Namespace
+        name: "{{ item }}"
+      loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo-db') + ['admin-app-db'] }}"
 
     - name: Delete HTPASSWD
       ansible.builtin.include_role:

@@ -1,0 +1,111 @@
+---
+- name: Installation
+  hosts: localhost
+  gather_facts: false
+
+  vars_prompt:
+    - name: "max_users_input"
+      prompt: "How many users participate in the hackathon?"
+      private: no
+
+  vars:
+    options:
+      1: "Postgres DB Update Scenario"
+      2: "Default Quotas Scenario"
+      3: "Network Policies Scenario"
+
+  vars_files:
+    - vars.yaml
+
+  tasks:
+
+    - name: Convert number of users to int
+      ansible.builtin.set_fact:
+        max_users: "{{ max_users_input | int }}"
+
+    - name: Setup kubeconfig file
+      ansible.builtin.include_role:
+        name: demos.utils.kubeconfig
+
+    - name: Show Scenarios
+      ansible.builtin.debug:
+        msg: ["vailable Scenarios:",  "1) {{ options[1] }}", "2) {{ options[2] }}", "3) {{ options[3] }}"]
+    
+    - name: Request Scenario
+      ansible.builtin.pause:
+        prompt: "Please introduce the desirec scenario number (1, 2, or 3): "
+      register: user_selection
+
+    - name: Save Scenario
+      ansible.builtin.set_fact:
+        option: "{{ user_selection.user_input | int }}"
+
+    - name: Postgres DB Update Scenario
+      block:
+        - name: "Patch only the POSTGRESQL_PASSWORD key in demo-app-db secret - {{ item }}"
+          ansible.builtin.command: >
+            oc patch secret demo-app-db -n "{{ item }}"
+            --type merge
+            -p '{"data": {"POSTGRESQL_PASSWORD": "{{ "changed!" | b64encode }}"}}'
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo-db') + ['admin-app-db'] }}"
+
+        - name: "Rollout restart deployment postgres - {{ item }}"
+          ansible.builtin.command: >
+            oc rollout restart deployment/postgres -n "{{ item }}"
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo-db') + ['admin-app-db'] }}"
+
+      when: option == "1"
+
+    - name: Default Quotas Scenario
+      block:
+        - name: "Create quotas - {{ item }}"
+          kubernetes.core.k8s:
+            state: present
+            definition: 
+              apiVersion: v1
+              kind: LimitRange
+              metadata:
+                name: default-cpu-mem
+                namespace: "{{ item }}"
+              spec:
+                limits:
+                  - default:
+                      cpu: "1"
+                      memory: "10Mi"
+                    defaultRequest:
+                      cpu: "500m"
+                      memory: "10Mi"
+                    type: Container
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo') + ['admin-app'] }}"
+
+        - name: "Delete app pods - {{ item }}"
+          ansible.builtin.command: >
+            oc delete pod --all -n {{ item }}
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo') + ['admin-app'] }}"
+
+      when: option == "2"
+
+    - name: Network Policies Scenario
+      block:
+        - name: "Create NP zero trust - {{ item }}"
+          kubernetes.core.k8s:
+            state: present
+            definition: 
+              apiVersion: networking.k8s.io/v1
+              kind: NetworkPolicy
+              metadata:
+                name: deny-all
+                namespace: "{{ item }}"
+              spec:
+                podSelector: {}
+                policyTypes:
+                  - Ingress
+                  - Egress
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo-db') + ['admin-app-db'] }}"
+
+        - name: "Delete app pods - {{ item }}"
+          ansible.builtin.command: >
+            oc delete pod --all -n {{ item }}
+          loop: "{{ query('sequence', 'start=1 end=' + max_users|string + ' format=user-%d-argo') + ['admin-app'] }}"
+
+      when: option == "3"

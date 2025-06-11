@@ -1,0 +1,188 @@
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: "admin-app"
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: "admin-app-db"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+    app.kubernetes.io/component: postgres
+    app.kubernetes.io/instance: postgres
+  name: postgres
+  namespace: "admin-app-db"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: postgres
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        deployment: postgres
+    spec:
+      containers:
+      - envFrom:
+          - secretRef:
+              name: demo-app-db
+        image: registry.redhat.io/rhel9/postgresql-16@sha256:4a386145f6730f4a55efb46d7b57aff112f275553e69ecacc18aa02874931175
+        imagePullPolicy: IfNotPresent
+        name: postgres
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: admin-app-db
+  labels:
+    app: postgres
+    app.kubernetes.io/component: postgres
+    app.kubernetes.io/instance: postgres
+spec:
+  ports:
+    - name: 5432-tcp
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  selector:
+    deployment: postgres
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: demo-app-db
+  namespace: "admin-app-db"
+data:
+  POSTGRESQL_DATABASE: ZGVtbw==
+  POSTGRESQL_PASSWORD: cGFzcw==
+  POSTGRESQL_USER: dXNlcg==
+type: Opaque
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: demo-app
+  namespace: admin-app
+  labels:
+    app: demo-app
+    app.kubernetes.io/component: demo-app
+    app.kubernetes.io/instance: demo-app
+    app.kubernetes.io/name: demo-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-17-ubi8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        deployment: demo-app
+    spec:
+      containers:
+        - name: demo-app
+          image: "quay.io/calopezb/hack-demo-app:1.0"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: DB_PASSWORD
+              value: pass
+            - name: DB_USER
+              value: user
+            - name: DB_HOST
+              value: postgres.admin-app-db.svc.cluster.local
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-app
+  namespace: admin-app
+  labels:
+    app: demo-app
+    app.kubernetes.io/component: demo-app
+    app.kubernetes.io/instance: demo-app
+    app.kubernetes.io/name: demo-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-17-ubi8
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: demo-app
+    deployment: demo-app
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: demo-app
+  namespace: admin-app
+  labels:
+    app: demo-app
+    app.kubernetes.io/component: demo-app
+    app.kubernetes.io/instance: demo-app
+    app.kubernetes.io/name: demo-app
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-17-ubi8
+spec:
+  to:
+    kind: Service
+    name: demo-app
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

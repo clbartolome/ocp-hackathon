@@ -9,6 +9,87 @@ kind: Project
 metadata:
   name: "user-{{ user_id }}-argo"
 ---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: "user-{{ user_id }}-argo-db"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+    app.kubernetes.io/component: postgres
+    app.kubernetes.io/instance: postgres
+  name: postgres
+  namespace: "user-{{ user_id }}-argo-db"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: postgres
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        deployment: postgres
+    spec:
+      containers:
+      - envFrom:
+          - secretRef:
+              name: demo-app-db
+        image: registry.redhat.io/rhel9/postgresql-16@sha256:4a386145f6730f4a55efb46d7b57aff112f275553e69ecacc18aa02874931175
+        imagePullPolicy: IfNotPresent
+        name: postgres
+        ports:
+        - containerPort: 5432
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: "user-{{ user_id }}-argo-db"
+  labels:
+    app: postgres
+    app.kubernetes.io/component: postgres
+    app.kubernetes.io/instance: postgres
+spec:
+  ports:
+    - name: 5432-tcp
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  selector:
+    deployment: postgres
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: demo-app-db
+  namespace: "user-{{ user_id }}-argo-db"
+data:
+  POSTGRESQL_DATABASE: ZGVtbw==
+  POSTGRESQL_PASSWORD: cGFzcw==
+  POSTGRESQL_USER: dXNlcg==
+type: Opaque
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -40,6 +121,20 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
+  name: admin-access
+  namespace: "user-{{ user_id }}-argo-db"
+subjects:
+- kind: User
+  name: "user-{{ user_id }}"
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
   name: openshift-gitops-admin-access
   namespace: "user-{{ user_id }}-argo"
 subjects:
@@ -50,3 +145,31 @@ roleRef:
   kind: ClusterRole
   name: admin
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: user-{{ user_id }}-argo
+users:
+  - user-{{ user_id }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: user-{{ user_id }}-project
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: user-{{ user_id }}-argo
+      server: 'https://kubernetes.default.svc'
+  roles:
+    - groups:
+        - user-{{ user_id }}-argo
+      name: user-{{ user_id }}-role
+      policies:
+        - 'p, proj:user-{{ user_id }}-project:user-{{ user_id }}-role, applications, *, user-{{ user_id }}-project/*, allow'
+  sourceRepos:
+    - '*'
