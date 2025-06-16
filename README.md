@@ -19,7 +19,6 @@ Guide [link](https://clbartolome.github.io/ocp-hackathon/ocp-hackathon/index.htm
 - Go to Red Hat OpenShift Dev Spaces Operator -> Red Hat OpenShift Dev Spaces instance Specification -> Create CheCluster with this settings:
     - Development Environments > startTimeoutSeconds: 600
     - Development Environments > storage > pvcStrategy: per-workspace
-    - (default config - optionally change start timeout)
 - Build Ansible Execution Environment Manually:
 
 ```sh
