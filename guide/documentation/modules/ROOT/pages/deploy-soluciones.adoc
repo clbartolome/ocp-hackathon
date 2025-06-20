@@ -1,6 +1,6 @@
 = Deploy Demo App in OpenShift - *Soluciones*
 
-A continuación se incluyen algunas pistas y las soluciones al reto *Deploy Demo App in OpenShift*
+A continuación se incluyen algunas pistas y las soluciones al reto *Deploy Demo App in OpenShift*.
 
 == Desplegar Base de Datos
 
@@ -9,20 +9,18 @@ A continuación se incluyen algunas pistas y las soluciones al reto *Deploy Demo
 Guía::	
 +	
 --	
-* Seleccionar el namespace: **%USER%-app**
-* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift
-* Ejecutar ``oc new-app --help`` y ver como configurar imagen, nombre y variables de entorno
-* Ejecutar el comando ``oc new-app`` con la configuracion deseada
-* Validar que el despliegue esta funcionando
-
-TIP: Recuerda que el README.md de la aplicación tenia algunos ejemplos...
+* Seleccionar el namespace: **%USER%-app**.
+* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift.
+* Ejecutar ``oc new-app --help`` y ver como configurar imagen, nombre y variables de entorno.
+* Ejecutar el comando ``oc new-app`` con la configuracion deseada.
+* Validar que el despliegue esta funcionando.
 
 --	
 Solución::	
 +	
 --	
-* Seleccionar el namespace: **%USER%-app**
-* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift
+* Seleccionar el namespace: **%USER%-app**.
+* Abrir la linea de comandos usando el boton **>_** en la consola de OpenShift.
 * Ejecutar:
 
 [.console-input]
@@ -57,24 +55,22 @@ oc get svc
 Guía::	
 +	
 --	
-* Seleccionar el namespace: **%USER%-app**
-* Abrir la seccion ``+ Add`` en la consola de OpenShift
-* Seleccionar la opcion ``Import from Git`` 
-* Rellenar la informacion para que se construya a partir de un ``builder image``
-* Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente
-* Acceder a la aplicación a partir del enlace a la ruta
-
-TIP: Recuerda que el README.md tiene informacion de las variables de entorno que hay que configurar (para el deployment)
+* Seleccionar el namespace: **%USER%-app**.
+* Abrir la seccion ``+ Add`` en la consola de OpenShift.
+* Seleccionar la opcion ``Import from Git`` .
+* Rellenar la informacion para que se construya a partir de un ``builder image``.
+* Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente.
+* Acceder a la aplicación a partir del enlace a la ruta.
 
 --	
 Solución::	
 +	
 --	
-* Seleccionar el namespace: **%USER%-app**
-* Abrir la seccion ``+ Add`` en la consola de OpenShift
-* Seleccionar la opcion ``Import from Git`` 
+* Seleccionar el namespace: **%USER%-app**.
+* Abrir la seccion ``+ Add`` en la consola de OpenShift.
+* Seleccionar la opcion ``Import from Git``.
 * Rellenar con la siguiente información:
-** Git Repo URL: http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID% (no hacer caso al warning, es por utilizar Gitea)
+** Git Repo URL: https://gitea-gitea.apps.%SERVER%/gitea/demo-app-%ID%
 ** Import Strategy: Builder Image (Java - openjdk-17-ubi8)
 ** Application name: <empty>
 ** Name: demo-app
@@ -106,8 +102,8 @@ oc logs demo-app-***
 oc get all
 ----	
 
-* Acceder mediante la ruta ``https://demo-app-%USER%-app.apps.%SERVER%`` y probar la app
+* Acceder mediante la ruta ``https://demo-app-%USER%-app.apps.%SERVER%`` y probar la app.
 
-IMPORTANT: Algunas configuracion e incluso la ruta pueden variar si has desplado la base de datos de forma manual o has cambiado alguna configuracion
+IMPORTANT: Algunas configuracion e incluso la ruta pueden variar si has desplado la base de datos de forma manual o has cambiado alguna configuracion.
 
 ====

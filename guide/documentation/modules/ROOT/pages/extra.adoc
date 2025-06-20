@@ -13,17 +13,17 @@ IMPORTANT: Para hacer mas ágiles los cambios, y por si hiciera falata modificar
 Los retos adicionales son:
 
 * **Configuración**:
-** Mover la configuracion de la base de datos a un secret y configMap
-** Mover la configuracion de la aplicación a un secret y configMap
+** Mover la configuracion de la base de datos a un secret y configMap.
+** Mover la configuracion de la aplicación a un secret y configMap.
 * **Definir health checks**. Recuerda:
-** Liveness se usa para ver si un contendor esta bien (no hay errores de memoria, cpu, algo que mate mi app) - si falla openshift reinicia el pod
-** Readiness se usa para ver si la aplicación esta lista para recibir trafico. Si falla openshift no manda trafico de forma temporal/elimina el servicio
+** Liveness se usa para ver si un contendor esta bien (no hay errores de memoria, cpu, algo que mate mi app) - si falla openshift reinicia el pod.
+** Readiness se usa para ver si la aplicación esta lista para recibir trafico. Si falla openshift no manda trafico de forma temporal/elimina el servicio.
 * **Gestion CPU, memoria y recursos **. Crear:
-** Limit Ranges (en %USER%-app)
-** Resources Quotas (en %USER%-app)
-** Añadir requests y limits a demo-app
+** Limit Ranges (en %USER%-app).
+** Resources Quotas (en %USER%-app).
+** Añadir requests y limits a demo-app.
 * **Network Policies**. Crear:
-** Network Policy para un modelo Zero-trust
-** Network Policy para poder comunicarnos desde fuera del cluster (que la ruta funcione)
+** Network Policy para un modelo Zero-trust.
+** Network Policy para poder comunicarnos desde fuera del cluster (que la ruta funcione).
 
 Y no... aqui no hay soluciones, ánimo!!!

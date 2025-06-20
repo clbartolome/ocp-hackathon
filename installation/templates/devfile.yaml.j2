@@ -38,15 +38,15 @@ components:
           path: /
   - name: postgres
     container:
-      image: postgres:16
+      image: registry.redhat.io/rhel9/postgresql-16
       env:
         - name: PGDATA
-          value: /tmp/pgdata
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
+          value: /var/lib/postgresql/data
+        - name: POSTGRESQL_USER
+          value: user
+        - name: POSTGRESQL_PASSWORD
           value: password
-        - name: POSTGRES_DB
+        - name: POSTGRESQL_DATABASE
           value: demo
       memoryLimit: 512Mi
       mountSources: true

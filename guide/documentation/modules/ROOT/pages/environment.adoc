@@ -85,11 +85,12 @@ Con OpenShift puedes:
 
 En resumen, OpenShift te permite centrarte en el desarrollo y la entrega continua de aplicaciones, sin preocuparte por la infraestructura subyacente.
 
-Para este Hackathon se va a utilizar un cluster en el que ya se han creado y configurado 3 namespaces que se utilizarán durante los diferentes ejercidios planteados:
+Para este Hackathon se va a utilizar un cluster en el que ya se han creado y configurado 3 namespaces que se utilizarán durante los diferentes ejercidios planteados (si has abierto tu IDE en DevSpaces verás un cuarto namespace):
 
-* **%USER%-app**: para el despliegue a traves de la consola
-* **%USER%-argo**: para el despliegue a traves de ArgoCD
-* **%USER%-argo-db**: para la base de datos que utilizaremos en el despliegue con ArgoCD
+* **%USER%-app**: para el despliegue a traves de la consola.
+* **%USER%-argo**: para el despliegue a traves de ArgoCD.
+* **%USER%-argo-db**: para la base de datos que utilizaremos en el despliegue con ArgoCD.
+* **%USER%-devspaces**: creado automaticamente para el DevSpaces (IDE) - no lo utilizaremos durante el hackathon.
 
 TIP: Revisa que los namespaces descritos anteriormente estan creados y los ves con tus credenciales (abajo)
 

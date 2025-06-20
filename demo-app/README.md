@@ -20,7 +20,7 @@ The application reads database connection details from environment variables:
 - `DB_HOST` (default: `localhost`)
 - `DB_PORT` (default: `5432`)
 - `DB_NAME` (default: `demo`)
-- `DB_USER` (default: `postgres`)
+- `DB_USER` (default: `user`)
 - `DB_PASSWORD` (default: `password`)
 
 ## Running Locally
@@ -32,7 +32,7 @@ The application reads database connection details from environment variables:
 
 1. **Create local database** (example):
     ```sh
-    podman run -d --name demo-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=demo -p 5432:5432 postgres:16
+    podman run -d --name demo-db -e POSTGRESQL_USER=user -e POSTGRESQL_PASSWORD=password -e POSTGRESQL_DATABASE=demo -p 5432:5432 registry.redhat.io/rhel9/postgresql-16
     ```
     
 2. **Build, Test & Run**:

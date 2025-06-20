@@ -1,6 +1,6 @@
 = GitOps y ArgoCD - *Soluciones*
 
-A continuación se incluyen algunas pistas y las soluciones al reto *GitOps y ArgoCD*
+A continuación se incluyen algunas pistas y las soluciones al reto *GitOps y ArgoCD*.
 
 == Repositorio Gitea
 
@@ -8,9 +8,7 @@ Acceder a **Gitea** y crear un nuevo repositorio:
 
 image::new_repo.png[repo]
 
-Cualquier nombre es válido, para las soluciones vamos a asumir que se llama: **demo-app-argo**
-
-IMPORTANT: Si no es posible clonar el repositorio, usar directamente la web de Gitea para crear y modificar los ficheros
+Cualquier nombre es válido, para las soluciones vamos a asumir que se llama: **demo-app-argo**.
 
 == Generar CRDs demo-app en Gitea
 
@@ -27,9 +25,9 @@ Guía::
 * Obtener el yaml del servicio ``demo-app`` en el namespace ``user-%ID%-app``, pegarlo en svc.yaml y limipiar informacion no necesaria. Hacer commit.
 * Obtener el yaml de la ruta ``demo-app`` en el namespace ``user-%ID%-app``, pegarlo en route.yaml y limipiar informacion no necesaria. Hacer commit.
 
-IMPORTANT: Recuerda cambiar la imagen de demo-app para que la descargue de QUAY
+CAUTION: Recuerda cambiar la imagen de demo-app para que la descargue de QUAY.
 
-TIP: Por ejemplo, con  ``oc get deploy demo-app -o yaml`` obtenemos el yaml del deployment usado en demo-app
+TIP: Por ejemplo, con  ``oc get deploy demo-app -o yaml`` obtenemos el yaml del deployment usado en demo-app.
 
 --	
 Solución::	
@@ -161,15 +159,15 @@ spec:
 Guía::	
 +	
 --	
-* Acceder a ArgoCD
+* Acceder a ArgoCD.
 * Crear una aplicacion:
 ** Nombre que inlcuya tu usuario
 ** Proyecto el unico que aparece
 ** Sincronizacion automática
 ** Apunta al repositorio creado en los pasos anteriores
 ** Destino el cluster local y namespace ``user-%ID%-argo``
-* Pulsar ``CREATE``
-* Validar los recursos se crean correctamente
+* Pulsar ``CREATE``.
+* Validar los recursos se crean correctamente.
 
 --	
 Solución::	
@@ -210,6 +208,6 @@ spec:
 
 Realizar pruebas para validar que ArgoCD y el modelo GitOps estan funcionando correctamente:
 
-* Borrar deployment en openshift
-* Escalar numero de replicas en ArgoCD
-* Cambiar alguna configuracion de demo-app
+* Borrar deployment en openshift.
+* Escalar numero de replicas en ArgoCD.
+* Cambiar alguna configuracion de demo-app.

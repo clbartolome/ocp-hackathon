@@ -10,9 +10,17 @@ Manos a la obra!!
 
 Realizar las siguientes acciones:
 
-* Desplegar una base de datos postgres usando la line de comandos a partir de la imagen: ``registry.redhat.io/rhel9/postgresql-16``
-* Construir y desplegar la aplicación ``demo-app`` usando la consola web y como fuente el repositorio git de nuestra aplicacion
+* Desplegar una base de datos postgres usando la linea de comandos a partir de la imagen: ``registry.redhat.io/rhel9/postgresql-16``.
+* Construir y desplegar la aplicación ``demo-app`` usando la consola web (botón ``+Add``) y como fuente el repositorio git de nuestra aplicacion.
 
-IMPORTANT: Para construir la aplicación y evitar errores de certificados, **usar la URL interna de gitea** (servicio): http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%
+[IMPORTANT]
+====
+* El en archivo ``README.md`` puedes ver información relevante para completar este reto:
+** Endpoints expuestos por la aplicación.
+** Detalle de las variables de entorno a configurar para ejecutar la aplicación.
+** Ejemplo de como configurar la BBDD con podman.
+* Utiliza el icono **>_** del menu superior de la consola de OpenShift para crear un contenedor con el cliente ``oc`` para poder usar la linea de comandos
+* El despliegue de la DDBB lo vamos a hacer usando una imagen, no utilizamos templates ya que no tienen la version de la base de datos que estamos utilizando
+* Es posible que al usar la consola web para desplegar la aplicación, al escribir la url del repositorio aparezca el waring ``The Gitea repository is unreachable. The repository might be private or does not exist``. No es importante, aparece por usar Gitea pero funcionará correctamente.
+====
 
-TIP: Utiliza el icono **>_** del menu superior de la consola de OpenShift para crear un contenedor con el cliente ``oc`` para poder usar la linea de comandos.

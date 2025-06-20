@@ -1,10 +1,10 @@
 = Demo App - *Soluciones*
 
-A continuación se incluyen algunas pistas y las soluciones al reto *Demo App*
+A continuación se incluyen algunas pistas y las soluciones al reto *Demo App*.
 
 == Abrir DevSpaces
 
-Revisar la sección: **2. Entorno** > **IDE web**
+Revisar la sección: **2. Entorno** > **IDE web**.
 
 == Ejecutar y Corregir tests
 
@@ -13,20 +13,20 @@ Revisar la sección: **2. Entorno** > **IDE web**
 Guía::	
 +	
 --	
-* Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**
-* Buscar la opción ``Tasks: Run Task`` y dentro de ``devfile `` ejecutar ``1. Run unit tests``
-* Revisar los logs y corregir el error
+* Dentro del IDE: ``[MENU] > Terminal > Run Task``.
+* Seleccionar ``devfile`` y ejecutar ``1. Run unit tests``.
+* Revisar los logs y corregir el error.
 
-TIP: Es posible que falte algun campo por actualizar en el método ``update``?
+TIP: Es posible que falte algun campo por actualizar en el método ``update``?.
 
 --	
 Solución::	
 +	
 --	
-* Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**
-* Buscar la opción ``Tasks: Run Task`` y dentro de ``devfile `` ejecutar ``1. Run unit tests``
-* Revisar los logs y corregir el error
-* Abrir la clase ``BankAccountController`` y moficar el método ``update``
+* Dentro del IDE: ``[MENU] > Terminal > Run Task``.
+* Seleccionar ``devfile`` y ejecutar ``1. Run unit tests``.
+* Revisar los logs y corregir el error.
+* Abrir la clase ``BankAccountController`` y moficar el método ``update``:
 
 [.console-input]
 [source,java,subs="attributes+,+macros"]	
@@ -43,26 +43,26 @@ return repository.findById(id)
     .orElse(ResponseEntity.notFound().build());
 }
 ----	
-* Volver a ejecutar los tests para validar
+* Volver a ejecutar los tests para validar.
 ====
 
 == Ejecutar en local
 
 Una vez corregida la aplicación realizar los siguientes pasos:
 
-* Dentro del IDE ejecutar ``Ctrl + Shift + P``. De forma alternativa: **view** > **Command Palette**
-* Buscar la opción ``Tasks: Run Task`` y dentro de ``devfile `` ejecutar ``3. Run application locally``
-* Esperar a que arranque y cuando salga una ventana diciendo ``Process accounts-index is now listening on port 8080. Open it ?`` pulsar ``Open in New Tab``
-* Realizar algunos tests en la web
+* Dentro del IDE: ``[MENU] > Terminal > Run Task``.
+* Seleccionar ``devfile`` y ejecutar ``3. Run application locally``.
+* Esperar a que arranque y cuando salga una ventana diciendo ``Process accounts-index is now listening on port 8080. Open it ?`` pulsar ``Open in New Tab``.
+* Realizar algunos tests en la web.
 
-CAUTION: Si el navegador automaticamente usa **https**, cambiarlo a **http** para poder acceder a la aplicacion
+CAUTION: Si el navegador automaticamente usa **https**, cambiarlo a **http** para poder acceder a la aplicacion.
 
 == Subir a Git
 
 Existen dos opciones:
 
-* Utilizar el menu de **Git** de visual estudio para hacer commit y push
-* Dentro del IDE ejecutar ``Ctrl + Shift + P`` > ``Create New Terminal``. En la nueva terminal:
+* Utilizar el menu de **Git** de visual estudio para hacer commit y push.
+* Dentro del IDE: ``[MENU] > Terminal > New Terminal``. En la nueva terminal:
 
 [.console-input]
 [source,bash,subs="attributes+,+macros"]	
@@ -73,4 +73,4 @@ git commit -m "fixed tests"
 git push
 ----	
 
-TIP: Usar los credenciales descritos en la seccion **2. Entorno**
+* Usar los credenciales descritos en la seccion **2. Entorno**.

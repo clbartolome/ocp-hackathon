@@ -10,19 +10,20 @@ Por tanto, para nuestra **demo-app** tendremos que crear un repositorio en **Git
 
 Para evitar conflictos con el despliegue que ya hemos realizado y poder usar los recursos generados como base, vamos a usar el namespace **%USER%-argo**.
 
-NOTE: La base de datos ya se encuentra desplegada en el namespace **%USER%-argo-db**.
-
-IMPORTANT: Se utilizará la imagen de la aplicación demo-app: **quay.io/calopezb/hack-demo-app:1.0**
-
 == El RETO
 
 Realizar las siguientes acciones:
 
-* Crear un repositorio en Gitea
-* Añadir los CRDs para desplegar la aplicación
-* Crear una aplicación en ArgoCD (sincronizacion automática)
-* Probar que ArgoCD despliega y corrige restablece la configuracion deseada en caso de cambios
+* Crear un repositorio en Gitea.
+* Añadir los CRDs para desplegar la aplicación.
+* Crear una aplicación en ArgoCD (sincronizacion automática).
+* Probar que ArgoCD despliega y corrige restablece la configuracion deseada en caso de cambios.
 
-IMPORTANT: El nombre de la aplicación en ArgoCD debe contener vuestro nombre de usuario, p.ej: **app-%USER%**
-CAUTION: En caso de errores de certificado, recuerda que puedes usar las URLs internas...
-
+[IMPORTANT]
+====
+* El nombre de la aplicación en ArgoCD debe contener vuestro nombre de usuario, p.ej: **app-%USER%**.
+* Para el ``Deployment`` se utilizará la imagen de la aplicación demo-app: **quay.io/calopezb/hack-demo-app:1.0**.
+* En ArgoCD, utilizar el cluster **https://kubernetes.default.svc** para el despliegue.
+* La base de datos ya se encuentra desplegada en el namespace **user-12-argo-db**.
+* Si no es posible clonar el repositorio, usar directamente la web de Gitea para crear y modificar los ficheros.
+====
