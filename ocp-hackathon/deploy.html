@@ -202,10 +202,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Desplegar una base de datos postgres usando la line de comandos a partir de la imagen: <code>registry.redhat.io/rhel9/postgresql-16</code></p>
+<p>Desplegar una base de datos postgres usando la linea de comandos a partir de la imagen: <code>registry.redhat.io/rhel9/postgresql-16</code>.</p>
 </li>
 <li>
-<p>Construir y desplegar la aplicación <code>demo-app</code> usando la consola web y como fuente el repositorio git de nuestra aplicacion</p>
+<p>Construir y desplegar la aplicación <code>demo-app</code> usando la consola web (botón <code>+Add</code>) y como fuente el repositorio git de nuestra aplicacion.</p>
 </li>
 </ul>
 </div>
@@ -216,19 +216,35 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Para construir la aplicación y evitar errores de certificados, <strong>usar la URL interna de gitea</strong> (servicio): <a href="http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%" class="bare">http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%</a>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p>El en archivo <code>README.md</code> puedes ver información relevante para completar este reto:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Endpoints expuestos por la aplicación.</p>
+</li>
+<li>
+<p>Detalle de las variables de entorno a configurar para ejecutar la aplicación.</p>
+</li>
+<li>
+<p>Ejemplo de como configurar la BBDD con podman.</p>
+</li>
+</ul>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Utiliza el icono <strong>&gt;_</strong> del menu superior de la consola de OpenShift para crear un contenedor con el cliente <code>oc</code> para poder usar la linea de comandos.
+</li>
+<li>
+<p>Utiliza el icono <strong>&gt;_</strong> del menu superior de la consola de OpenShift para crear un contenedor con el cliente <code>oc</code> para poder usar la linea de comandos</p>
+</li>
+<li>
+<p>El despliegue de la DDBB lo vamos a hacer usando una imagen, no utilizamos templates ya que no tienen la version de la base de datos que estamos utilizando</p>
+</li>
+<li>
+<p>Es posible que al usar la consola web para desplegar la aplicación, al escribir la url del repositorio aparezca el waring <code>The Gitea repository is unreachable. The repository might be private or does not exist</code>. No es importante, aparece por usar Gitea pero funcionará correctamente.</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>

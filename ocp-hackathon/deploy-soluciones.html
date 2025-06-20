@@ -183,7 +183,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A continuación se incluyen algunas pistas y las soluciones al reto <strong>Deploy Demo App in OpenShift</strong></p>
+<p>A continuación se incluyen algunas pistas y las soluciones al reto <strong>Deploy Demo App in OpenShift</strong>.</p>
 </div>
 </div>
 </div>
@@ -206,43 +206,31 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Seleccionar el namespace: <strong>%USER%-app</strong></p>
+<p>Seleccionar el namespace: <strong>%USER%-app</strong>.</p>
 </li>
 <li>
-<p>Abrir la linea de comandos usando el boton <strong>&gt;_</strong> en la consola de OpenShift</p>
+<p>Abrir la linea de comandos usando el boton <strong>&gt;_</strong> en la consola de OpenShift.</p>
 </li>
 <li>
-<p>Ejecutar <code>oc new-app --help</code> y ver como configurar imagen, nombre y variables de entorno</p>
+<p>Ejecutar <code>oc new-app --help</code> y ver como configurar imagen, nombre y variables de entorno.</p>
 </li>
 <li>
-<p>Ejecutar el comando <code>oc new-app</code> con la configuracion deseada</p>
+<p>Ejecutar el comando <code>oc new-app</code> con la configuracion deseada.</p>
 </li>
 <li>
-<p>Validar que el despliegue esta funcionando</p>
+<p>Validar que el despliegue esta funcionando.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Recuerda que el README.md de la aplicación tenia algunos ejemplos&#8230;&#8203;
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_soluci-n">
 <div class="ulist">
 <ul>
 <li>
-<p>Seleccionar el namespace: <strong>%USER%-app</strong></p>
+<p>Seleccionar el namespace: <strong>%USER%-app</strong>.</p>
 </li>
 <li>
-<p>Abrir la linea de comandos usando el boton <strong>&gt;_</strong> en la consola de OpenShift</p>
+<p>Abrir la linea de comandos usando el boton <strong>&gt;_</strong> en la consola de OpenShift.</p>
 </li>
 <li>
 <p>Ejecutar:</p>
@@ -301,56 +289,44 @@ oc get svc</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Seleccionar el namespace: <strong>%USER%-app</strong></p>
+<p>Seleccionar el namespace: <strong>%USER%-app</strong>.</p>
 </li>
 <li>
-<p>Abrir la seccion <code>+ Add</code> en la consola de OpenShift</p>
+<p>Abrir la seccion <code>+ Add</code> en la consola de OpenShift.</p>
 </li>
 <li>
-<p>Seleccionar la opcion <code>Import from Git</code></p>
+<p>Seleccionar la opcion <code>Import from Git</code> .</p>
 </li>
 <li>
-<p>Rellenar la informacion para que se construya a partir de un <code>builder image</code></p>
+<p>Rellenar la informacion para que se construya a partir de un <code>builder image</code>.</p>
 </li>
 <li>
-<p>Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente</p>
+<p>Revisar con las utilidades de la consola o de la terminal que la aplicación se depliega correctamente.</p>
 </li>
 <li>
-<p>Acceder a la aplicación a partir del enlace a la ruta</p>
+<p>Acceder a la aplicación a partir del enlace a la ruta.</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Recuerda que el README.md tiene informacion de las variables de entorno que hay que configurar (para el deployment)
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset2_soluci-n">
 <div class="ulist">
 <ul>
 <li>
-<p>Seleccionar el namespace: <strong>%USER%-app</strong></p>
+<p>Seleccionar el namespace: <strong>%USER%-app</strong>.</p>
 </li>
 <li>
-<p>Abrir la seccion <code>+ Add</code> en la consola de OpenShift</p>
+<p>Abrir la seccion <code>+ Add</code> en la consola de OpenShift.</p>
 </li>
 <li>
-<p>Seleccionar la opcion <code>Import from Git</code></p>
+<p>Seleccionar la opcion <code>Import from Git</code>.</p>
 </li>
 <li>
 <p>Rellenar con la siguiente información:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Git Repo URL: <a href="http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%" class="bare">http://gitea.gitea.svc.cluster.local:3000/gitea/demo-app-%ID%</a> (no hacer caso al warning, es por utilizar Gitea)</p>
+<p>Git Repo URL: <a href="https://gitea-gitea.apps.%SERVER%/gitea/demo-app-%ID%" class="bare">https://gitea-gitea.apps.%SERVER%/gitea/demo-app-%ID%</a></p>
 </li>
 <li>
 <p>Import Strategy: Builder Image (Java - openjdk-17-ubi8)</p>
@@ -415,7 +391,7 @@ oc get all</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Acceder mediante la ruta <code><a href="https://demo-app-%USER%-app.apps.%SERVER%" class="bare">https://demo-app-%USER%-app.apps.%SERVER%</a></code> y probar la app</p>
+<p>Acceder mediante la ruta <code><a href="https://demo-app-%USER%-app.apps.%SERVER%" class="bare">https://demo-app-%USER%-app.apps.%SERVER%</a></code> y probar la app.</p>
 </li>
 </ul>
 </div>
@@ -426,7 +402,7 @@ oc get all</code></pre>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Algunas configuracion e incluso la ruta pueden variar si has desplado la base de datos de forma manual o has cambiado alguna configuracion
+Algunas configuracion e incluso la ruta pueden variar si has desplado la base de datos de forma manual o has cambiado alguna configuracion.
 </td>
 </tr>
 </table>
